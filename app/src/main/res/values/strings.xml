@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Distributed2017AndroidApp</string>
+    <string name="StartLat">Start latitude</string>
+    <string name="StartLon">Start longitude</string>
+    <string name="EndLat">End Latitude</string>
+    <string name="EndLon">End Longitude</string>
+    <string name="GetDirs">Get Directions</string>
+    <string name="DefaultStartLat">33.81</string>
+    <string name="DefaultStartLon">-117.91</string>
+    <string name="DefaultEndLat">34.13</string>
+    <string name="DefaultEndLon">-118.35</string>
+</resources>
