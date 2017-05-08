@@ -2,9 +2,7 @@ package com.distributed.distributed2017androidapp.Controller;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.distributed.distributed2017androidapp.Model.Directions;
-
+import model.Directions;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,7 +14,7 @@ import java.net.*;
 
 public class HandleConnections extends AsyncTask<Object, Object, String> {
     String dstAddress;
-    int dstPort;
+    private int dstPort;
     String response = "";
     Directions askedDirs, ourDirs;
     public HandleConnections(String address, int port, Directions askedDirs) {
@@ -27,6 +25,10 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
 
     public Directions getOurDirs() {
         return ourDirs;
+    }
+
+    public Directions getAskedDirs() {
+        return askedDirs;
     }
 
     @Override
@@ -41,15 +43,14 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             if(askedDirs==null)
                 Log.e("isError","iserrorrrrr");
-            objectOutputStream.writeObject(this.askedDirs);
+            objectOutputStream.writeObject(this.getAskedDirs());
             objectOutputStream.flush();
             this.ourDirs=(Directions)objectInputStream.readObject();
+            Log.e("isError",this.getOurDirs().toString());
         } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             response = "UnknownHostException: " + e.toString();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             response = "IOException: " + e.toString();
         } catch (ClassNotFoundException e) {
@@ -72,7 +73,7 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        Log.i("Our Dirs:",this.getOurDirs().getDirs());
+        //Log.i("Our Dirs:",this.getOurDirs().getDirs());
 
     }
 

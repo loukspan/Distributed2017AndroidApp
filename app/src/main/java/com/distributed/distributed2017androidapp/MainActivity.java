@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.distributed.distributed2017androidapp.Controller.HandleConnections;
-import com.distributed.distributed2017androidapp.Model.Directions;
+import model.Directions;
 
 import java.math.BigDecimal;
 

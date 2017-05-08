@@ -1,4 +1,4 @@
-package com.distributed.distributed2017androidapp.Model;
+package model;
 
 import android.util.Log;
 
@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Directions implements Serializable{
+	private static final long serialVersionUID = -3616074050459610955L;
 	private double startlon, startlat, endlon,endlat;
 	//private ArrayList[]() routes;
 	private String dirs;
