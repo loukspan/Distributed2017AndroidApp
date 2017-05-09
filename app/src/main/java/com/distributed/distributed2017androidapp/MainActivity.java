@@ -1,5 +1,6 @@
 package com.distributed.distributed2017androidapp;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
                 if(canUse()){
                     askedDirs= new Directions(Double.parseDouble(startLat),Double.parseDouble(startLon),Double.parseDouble(endLat),Double.parseDouble(endLon));
                     Log.i("OurDirs",askedDirs.toString());
-                    HandleConnections handleConnections = new HandleConnections("192.168.1.87",4321,askedDirs);
+                    HandleConnections handleConnections = new HandleConnections("192.168.1.73",4321,askedDirs);
                     handleConnections.execute();
-                    Toast.makeText(getApplicationContext(),handleConnections.getOurDirs().getDirs(), Toast.LENGTH_LONG).show();
+                    while(handleConnections.getOurDirs()==null){
+                        int i=0;
+                        i++;
+                    }
+                    Toast.makeText(getApplicationContext(), handleConnections.getOurDirs().getDirs(), Toast.LENGTH_LONG).show();
+                    handleConnections.cancel(true);
                 }else{
                     Toast.makeText(getApplicationContext(),"We cannot use the inputs ", Toast.LENGTH_LONG).show();
                 }

@@ -2,6 +2,8 @@ package com.distributed.distributed2017androidapp.Controller;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+
 import model.Directions;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -31,6 +33,9 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
         return askedDirs;
     }
 
+    public void setOurDirs(Directions dirs){
+        this.ourDirs=dirs;
+    }
     @Override
     protected String doInBackground(Object... arg0) {
 
@@ -45,18 +50,20 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
                 Log.e("isError","iserrorrrrr");
             objectOutputStream.writeObject(this.getAskedDirs());
             objectOutputStream.flush();
-            this.ourDirs=(Directions)objectInputStream.readObject();
-            Log.e("isError",this.getOurDirs().toString());
+            Object object = (Directions)objectInputStream.readObject();
+            //this.ourDirs=(Directions)objectInputStream.readObject();
+            //Log.d("Our dirs  ",object.getClass().toString());
+            this.setOurDirs((Directions)object);
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            Log.d("UnknownHostException  ",e.getMessage());
             response = "UnknownHostException: " + e.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("IOException  ",e.getMessage());
             response = "IOException: " + e.toString();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Log.d("ClassNotFoundException",e.getMessage());
         }catch (NullPointerException e){
-            e.getMessage();
+            Log.d("Our dirs  ",e.getMessage());
         } finally {
             if (socket != null) {
                 try {
