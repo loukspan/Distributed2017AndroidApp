@@ -50,7 +50,7 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
                 Log.e("isError","iserrorrrrr");
             objectOutputStream.writeObject(this.getAskedDirs());
             objectOutputStream.flush();
-            Object object = (Directions)objectInputStream.readObject();
+            Object object = objectInputStream.readObject();
             //this.ourDirs=(Directions)objectInputStream.readObject();
             //Log.d("Our dirs  ",object.getClass().toString());
             this.setOurDirs((Directions)object);
@@ -80,7 +80,8 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        //Log.i("Our Dirs:",this.getOurDirs().getDirs());
+
+        Log.d("Our Dirs:",response);
 
     }
 
