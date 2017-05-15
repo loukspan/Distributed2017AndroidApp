@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 if(canUse()){
                     askedDirs= new Directions(Double.parseDouble(startLat),Double.parseDouble(startLon),Double.parseDouble(endLat),Double.parseDouble(endLon));
                     Log.i("OurDirs",askedDirs.toString());
-                    HandleConnections handleConnections = new HandleConnections("172.16.2.31",4321,askedDirs);
+                    HandleConnections handleConnections = new HandleConnections("192.168.1.73",4321,askedDirs);
                     handleConnections.execute();
                     while(handleConnections.getOurDirs()==null){
                         int i=0;

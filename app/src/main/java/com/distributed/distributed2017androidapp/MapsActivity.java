@@ -3,7 +3,6 @@ package com.distributed.distributed2017androidapp;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,7 +21,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Intent intent = getIntent();
-        final Directions ourDirs = intent.getParcelableExtra("Directions");
+        final Directions ourDirs =(Directions) intent.getSerializableExtra("Directions");
         _startLatLng = new LatLng(ourDirs.getStartlat(),ourDirs.getStartlon());
         _endLatLng = new LatLng(ourDirs.getEndlat(),ourDirs.getEndlon());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
