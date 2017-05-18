@@ -15,9 +15,17 @@ import java.net.*;
  */
 
 public class HandleConnections extends AsyncTask<Object, Object, String> {
+    Socket socket = null;
+    ObjectInputStream objectInputStream = null;
+    ObjectOutputStream objectOutputStream = null;
     String dstAddress;
     private int dstPort;
     String response = "";
+
+    public void setAskedDirs(Directions askedDirs) {
+        this.askedDirs = askedDirs;
+    }
+
     Directions askedDirs, ourDirs;
     public HandleConnections(String address, int port, Directions askedDirs) {
         dstAddress = address;
@@ -37,17 +45,16 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
         this.ourDirs=dirs;
     }
     @Override
-    protected String doInBackground(Object... arg0) {
-
-        Socket socket = null;
-        ObjectInputStream objectInputStream = null;
-        ObjectOutputStream objectOutputStream = null;
+    public String doInBackground(Object... arg0) {
         try {
-            socket = new Socket(dstAddress, dstPort);
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            if(socket==null) {
+                socket = new Socket(dstAddress, dstPort);
+                objectInputStream = new ObjectInputStream(socket.getInputStream());
+                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            }
             if(askedDirs==null)
                 Log.e("isError","iserrorrrrr");
+            Log.i("askeddirs: ",askedDirs.toString());
             objectOutputStream.writeObject(this.getAskedDirs());
             objectOutputStream.flush();
             Object object = objectInputStream.readObject();
@@ -57,9 +64,9 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
         } catch (UnknownHostException e) {
             Log.d("UnknownHostException  ",e.getMessage());
             response = "UnknownHostException: " + e.toString();
-        } catch (IOException e) {
-            Log.d("IOException  ",e.getMessage());
-            response = "IOException: " + e.toString();
+        } catch (IOException jh) {
+            Log.d("IOException  ",jh.getMessage());
+            response = "IOException: " + jh.toString();
         } catch (ClassNotFoundException e) {
             Log.d("ClassNotFoundException",e.getMessage());
         }catch (NullPointerException e){

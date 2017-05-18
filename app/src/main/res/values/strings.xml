@@ -9,5 +9,10 @@
     <string name="DefaultStartLon">-117.9180063</string>
     <string name="DefaultEndLat">34.1385374</string>
     <string name="DefaultEndLon">-118.3529798</string>
+    <string name="OtherStartLat">41.67267349999999</string>
+    <string name="OtherStartLon">-72.7160707</string>
+    <string name="OtherEndLat">41.677928</string>
+    <string name="OtherEndLon">-72.85322859999999</string>
     <string name="title_activity_maps">Map</string>
+    <string name="Switch_LatLng">Select Lat/Lng</string>
 </resources>

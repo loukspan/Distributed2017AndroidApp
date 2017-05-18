@@ -9,27 +9,43 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.distributed.distributed2017androidapp.MainActivity">
+    tools:context="com.distributed.distributed2017androidapp.MainActivity"
+    android:weightSum="1">
+
+    <Switch
+        android:id="@+id/select_route"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/Switch_LatLng"
+        android:textAlignment="center"
+        android:textStyle="bold|italic" />
+
     <TextView
         android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/StartLat"
         android:paddingBottom="@dimen/activity_vertical_margin"/>
+
     <EditText
         android:id="@+id/startlat"
-        android:text="@string/DefaultStartLat"
         android:layout_width="match_parent"
-        android:elevation="2dp"
-        android:background="@drawable/edittextrect"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:background="@drawable/edittextrect"
+        android:elevation="2dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:text="@string/DefaultStartLat" />
+
     <TextView
-        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:text="@string/StartLon"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:textColor="@color/colorPrimary" />
+
     <EditText
         android:id="@+id/startlon"
         android:text="@string/DefaultStartLon"
@@ -38,12 +54,15 @@
         android:background="@drawable/edittextrect"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"/>
+
     <TextView
-        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:text="@string/EndLat"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:textColor="@color/colorPrimary" />
+
     <EditText
         android:id="@+id/endlat"
         android:text="@string/DefaultEndLat"
@@ -52,12 +71,14 @@
         android:background="@drawable/edittextrect"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"/>
+
     <TextView
         android:textColor="@color/colorPrimary"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/EndLon"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:text="@string/EndLon" />
+
     <EditText
         android:id="@+id/endlon"
         android:text="@string/DefaultEndLon"
@@ -71,5 +92,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/GetDirs"
         android:text="@string/GetDirs"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:textColor="@color/colorPrimary"
+        android:layout_weight="0.35" />
 
 </LinearLayout>
