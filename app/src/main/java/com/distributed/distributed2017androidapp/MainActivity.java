@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     Directions ourDirs = handleConnections.getOurDirs();
                     textView.setText(ourDirs.toString());
                     //Toast.makeText(getApplicationContext(),ourDirs.toString(),Toast.LENGTH_LONG).show();
-                    /*Intent goToMaps = new Intent(MainActivity.this,MapsActivity.class);
+                    Intent goToMaps = new Intent(MainActivity.this,MapsActivity.class);
                     goToMaps.putExtra("Directions",ourDirs);
-                    startActivity(goToMaps);*/
+                    startActivity(goToMaps);
                     handleConnections.setAskedDirs(null);
                     askedDirs=null;handleConnections=null;
                 }else{
