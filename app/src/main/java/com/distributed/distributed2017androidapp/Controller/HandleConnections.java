@@ -2,9 +2,9 @@ package com.distributed.distributed2017androidapp.Controller;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.distributed.distributed2017androidapp.Model.Directions;
-
+import model.Directions;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -15,9 +15,17 @@ import java.net.*;
  */
 
 public class HandleConnections extends AsyncTask<Object, Object, String> {
+    Socket socket = null;
+    ObjectInputStream objectInputStream = null;
+    ObjectOutputStream objectOutputStream = null;
     String dstAddress;
-    int dstPort;
+    private int dstPort;
     String response = "";
+
+    public void setAskedDirs(Directions askedDirs) {
+        this.askedDirs = askedDirs;
+    }
+
     Directions askedDirs, ourDirs;
     public HandleConnections(String address, int port, Directions askedDirs) {
         dstAddress = address;
@@ -29,33 +37,40 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
         return ourDirs;
     }
 
-    @Override
-    protected String doInBackground(Object... arg0) {
+    public Directions getAskedDirs() {
+        return askedDirs;
+    }
 
-        Socket socket = null;
-        ObjectInputStream objectInputStream = null;
-        ObjectOutputStream objectOutputStream = null;
+    public void setOurDirs(Directions dirs){
+        this.ourDirs=dirs;
+    }
+    @Override
+    public String doInBackground(Object... arg0) {
         try {
-            socket = new Socket(dstAddress, dstPort);
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            if(socket==null) {
+                socket = new Socket(dstAddress, dstPort);
+                objectInputStream = new ObjectInputStream(socket.getInputStream());
+                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            }
             if(askedDirs==null)
                 Log.e("isError","iserrorrrrr");
-            objectOutputStream.writeObject(this.askedDirs);
+            Log.i("askeddirs: ",askedDirs.toString());
+            objectOutputStream.writeObject(this.getAskedDirs());
             objectOutputStream.flush();
-            this.ourDirs=(Directions)objectInputStream.readObject();
+            Object object = objectInputStream.readObject();
+            //this.ourDirs=(Directions)objectInputStream.readObject();
+            //Log.d("Our dirs  ",object.getClass().toString());
+            this.setOurDirs((Directions)object);
         } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d("UnknownHostException  ",e.getMessage());
             response = "UnknownHostException: " + e.toString();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            response = "IOException: " + e.toString();
+        } catch (IOException jh) {
+            Log.d("IOException  ",jh.getMessage());
+            response = "IOException: " + jh.toString();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Log.d("ClassNotFoundException",e.getMessage());
         }catch (NullPointerException e){
-            e.getMessage();
+            Log.d("Our dirs  ",e.getMessage());
         } finally {
             if (socket != null) {
                 try {
@@ -72,7 +87,8 @@ public class HandleConnections extends AsyncTask<Object, Object, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        Log.i("Our Dirs:",this.getOurDirs().getDirs());
+
+        Log.d("Our Dirs:",response);
 
     }
 
