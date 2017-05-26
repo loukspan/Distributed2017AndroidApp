@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     askedDirs= new Directions(Double.parseDouble(startLat),Double.parseDouble(startLon),Double.parseDouble(endLat),Double.parseDouble(endLon));
                     //Log.i("OurDirs",askedDirs.toString());
                     if(handleConnections==null) {
-                        handleConnections = new HandleConnections("192.168.1.73", 4321, askedDirs);
+                        handleConnections = new HandleConnections("172.16.1.58", 4321, askedDirs);
                         handleConnections.setAskedDirs(askedDirs);
                         handleConnections.execute();
                     }else {
